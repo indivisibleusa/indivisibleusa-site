@@ -17,7 +17,7 @@
     @keyframes rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
     .avatar-wrap { display: flex; justify-content: center; margin-bottom: 22px; animation: rise 0.7s 0.1s cubic-bezier(0.22, 1, 0.36, 1) both; }
     .avatar-ring { width: 84px; height: 84px; border-radius: 50%; padding: 3px; background: linear-gradient(135deg, var(--red), var(--gold)); }
-    .avatar-placeholder { width: 100%; height: 100%; border-radius: 50%; background: var(--navy); display: flex; align-items: center; justify-content: center; font-size: 26px; }
+    .avatar-ring img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block; }
     .eyebrow { text-align: center; font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
     h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 11vw, 54px); line-height: 1; letter-spacing: 0.02em; text-align: center; color: var(--white); margin-bottom: 14px; }
     h1 span { color: var(--red); }
@@ -29,11 +29,13 @@
     .avatars span:first-child { margin-left: 0; }
     .social-proof p { font-size: 12px; color: rgba(248,245,238,0.55); }
     .social-proof p strong { color: rgba(248,245,238,0.85); }
-    .form-wrap { display: flex; gap: 8px; width: 100%; }
-    .form-wrap input[type="email"] { flex: 1; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 13px 16px; font-family: 'DM Sans', sans-serif; font-size: 15px; color: var(--white); outline: none; transition: border-color 0.2s; }
-    .form-wrap input[type="email"]::placeholder { color: rgba(248,245,238,0.35); }
-    .form-wrap input[type="email"]:focus { border-color: rgba(255,255,255,0.3); }
-    .form-wrap button { background: var(--red); color: var(--white); border: none; border-radius: 10px; padding: 13px 20px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: background 0.2s, transform 0.1s; }
+    .form-wrap { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+    .form-row { display: flex; gap: 8px; }
+    .form-wrap input[type="text"],
+    .form-wrap input[type="email"] { flex: 1; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 13px 16px; font-family: 'DM Sans', sans-serif; font-size: 15px; color: var(--white); outline: none; transition: border-color 0.2s; width: 100%; }
+    .form-wrap input::placeholder { color: rgba(248,245,238,0.35); }
+    .form-wrap input:focus { border-color: rgba(255,255,255,0.3); }
+    .form-wrap button { background: var(--red); color: var(--white); border: none; border-radius: 10px; padding: 13px 20px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; width: 100%; transition: background 0.2s, transform 0.1s; }
     .form-wrap button:hover { background: #a80d25; }
     .form-wrap button:active { transform: scale(0.97); }
     .form-wrap button:disabled { opacity: 0.6; cursor: not-allowed; }
@@ -41,7 +43,7 @@
     .form-msg.success { color: #6ee7a0; }
     .form-msg.error { color: #f87171; }
     .fine-print { text-align: center; font-size: 11px; color: rgba(248,245,238,0.28); margin-top: 14px; }
-    @media (max-width: 480px) { .card { padding: 36px 22px 32px; border-radius: 16px; margin: 20px 12px; } .avatar-ring { width: 74px; height: 74px; } .form-wrap { flex-direction: column; } .form-wrap button { width: 100%; } }
+    @media (max-width: 480px) { .card { padding: 36px 22px 32px; border-radius: 16px; margin: 20px 12px; } .avatar-ring { width: 74px; height: 74px; } }
     @media (max-width: 360px) { .card { padding: 28px 16px 26px; } }
   </style>
 </head>
@@ -49,20 +51,29 @@
 <div class="stripe-top"></div>
 <div class="stars" id="stars"></div>
 <div class="card">
-  <div class="avatar-wrap"><div class="avatar-ring"><div class="avatar-placeholder">🇺🇸</div></div></div>
+  <div class="avatar-wrap">
+    <div class="avatar-ring">
+      <img src="profile.jpg" alt="Indivisible USA" />
+    </div>
+  </div>
   <p class="eyebrow">Indivisible USA</p>
   <h1>Run With Us.<br><span>Stand For</span> Something.</h1>
-  <p class="sub">The next event is coming. <strong>Be first to know</strong> — date, location, and details before we go public.</p>
+  <p class="sub">Want to attend an event? <strong>Join the list</strong> and be the first to know when and where we show up next.</p>
   <div class="social-proof">
     <div class="avatars"><span>T</span><span>J</span><span>M</span><span>+</span></div>
     <p><strong>1,200+</strong> Americans already in.</p>
   </div>
   <form class="form-wrap" id="subscribe-form">
-    <input type="email" id="email-input" placeholder="Enter your email" required />
-    <button type="submit" id="submit-btn">Get Access</button>
+    <div class="form-row">
+      <input type="text" id="name-input" placeholder="First name" />
+    </div>
+    <div class="form-row">
+      <input type="email" id="email-input" placeholder="Email address" required />
+    </div>
+    <button type="submit" id="submit-btn">I'm In</button>
   </form>
   <div class="form-msg" id="form-msg"></div>
-  <p class="fine-print">No spam. Just the next event — when it drops.</p>
+  <p class="fine-print">No spam. Just events — when they drop.</p>
 </div>
 <script>
   const container = document.getElementById('stars');
@@ -77,6 +88,7 @@
   document.getElementById('subscribe-form').addEventListener('submit', async (e) => {
     e.preventDefault();
     const email = document.getElementById('email-input').value.trim();
+    const firstName = document.getElementById('name-input').value.trim();
     const btn = document.getElementById('submit-btn');
     const msg = document.getElementById('form-msg');
 
@@ -89,13 +101,14 @@
       const res = await fetch('/.netlify/functions/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email })
+        body: JSON.stringify({ email, firstName })
       });
       const data = await res.json();
       if (res.ok) {
         msg.className = 'form-msg success';
-        msg.textContent = "You're in. We'll see you at the event.";
+        msg.textContent = "You're in. We'll see you at the next event.";
         document.getElementById('email-input').value = '';
+        document.getElementById('name-input').value = '';
         btn.textContent = 'Done';
       } else {
         throw new Error(data.error || 'Something went wrong.');
@@ -104,7 +117,7 @@
       msg.className = 'form-msg error';
       msg.textContent = err.message || 'Something went wrong. Try again.';
       btn.disabled = false;
-      btn.textContent = 'Get Access';
+      btn.textContent = "I'm In";
     }
   });
 </script>
