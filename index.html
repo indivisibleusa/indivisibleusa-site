@@ -7,12 +7,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --red: #C8102E; --navy: #0A1628; --white: #F8F5EE; --gold: #D4AF37; --mid: #1C2E4A; }
+    :root { --red: #C8102E; --navy: #0A1628; --white: #F8F5EE; --gold: #D4AF37; --mid: #1C2E4A; --blue: #1251C1; }
     html, body { font-family: 'DM Sans', sans-serif; background: var(--navy); min-height: 100vh; min-height: 100dvh; display: flex; align-items: center; justify-content: center; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
     .stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
     .star { position: absolute; background: white; border-radius: 50%; animation: twinkle var(--d, 3s) ease-in-out infinite var(--delay, 0s); opacity: 0; }
     @keyframes twinkle { 0%, 100% { opacity: 0; } 50% { opacity: var(--bright, 0.6); } }
-    .stripe-top { position: fixed; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--red) 0%, var(--red) 33%, var(--white) 33%, var(--white) 66%, var(--navy) 66%); z-index: 100; }
+    .stripe-top { position: fixed; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--red) 0%, var(--red) 33%, var(--white) 33%, var(--white) 66%, var(--blue) 66%); z-index: 100; }
     .card { position: relative; z-index: 10; background: var(--mid); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 44px 40px 40px; width: 100%; max-width: 460px; margin: 28px 16px; box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04); animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
     @keyframes rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
     .avatar-wrap { display: flex; justify-content: center; margin-bottom: 22px; animation: rise 0.7s 0.1s cubic-bezier(0.22, 1, 0.36, 1) both; }
@@ -29,10 +29,19 @@
     .avatars span:first-child { margin-left: 0; }
     .social-proof p { font-size: 12px; color: rgba(248,245,238,0.55); }
     .social-proof p strong { color: rgba(248,245,238,0.85); }
-    .beehiiv-wrap { width: 100%; border-radius: 12px; overflow: hidden; }
-    .beehiiv-wrap iframe { width: 100%; min-height: 320px; border: none; display: block; }
+    .form-wrap { display: flex; gap: 8px; width: 100%; }
+    .form-wrap input[type="email"] { flex: 1; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 13px 16px; font-family: 'DM Sans', sans-serif; font-size: 15px; color: var(--white); outline: none; transition: border-color 0.2s; }
+    .form-wrap input[type="email"]::placeholder { color: rgba(248,245,238,0.35); }
+    .form-wrap input[type="email"]:focus { border-color: rgba(255,255,255,0.3); }
+    .form-wrap button { background: var(--red); color: var(--white); border: none; border-radius: 10px; padding: 13px 20px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: background 0.2s, transform 0.1s; }
+    .form-wrap button:hover { background: #a80d25; }
+    .form-wrap button:active { transform: scale(0.97); }
+    .form-wrap button:disabled { opacity: 0.6; cursor: not-allowed; }
+    .form-msg { text-align: center; font-size: 13px; margin-top: 10px; min-height: 18px; }
+    .form-msg.success { color: #6ee7a0; }
+    .form-msg.error { color: #f87171; }
     .fine-print { text-align: center; font-size: 11px; color: rgba(248,245,238,0.28); margin-top: 14px; }
-    @media (max-width: 480px) { .card { padding: 36px 22px 32px; border-radius: 16px; margin: 20px 12px; } .avatar-ring { width: 74px; height: 74px; } }
+    @media (max-width: 480px) { .card { padding: 36px 22px 32px; border-radius: 16px; margin: 20px 12px; } .avatar-ring { width: 74px; height: 74px; } .form-wrap { flex-direction: column; } .form-wrap button { width: 100%; } }
     @media (max-width: 360px) { .card { padding: 28px 16px 26px; } }
   </style>
 </head>
@@ -43,16 +52,17 @@
   <div class="avatar-wrap"><div class="avatar-ring"><div class="avatar-placeholder">🇺🇸</div></div></div>
   <p class="eyebrow">Indivisible USA</p>
   <h1>Run With Us.<br><span>Stand For</span> Something.</h1>
-  <p class="sub">Get <strong>first access</strong> to events, merch drops, and updates from the community that's showing up for America.</p>
+  <p class="sub">The next event is coming. <strong>Be first to know</strong> — date, location, and details before we go public.</p>
   <div class="social-proof">
     <div class="avatars"><span>T</span><span>J</span><span>M</span><span>+</span></div>
     <p><strong>1,200+</strong> Americans already in.</p>
   </div>
-  <div class="beehiiv-wrap" id="beehiiv-form">
-    <script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
-    <iframe src="https://subscribe-forms.beehiiv.com/6b536a97-3862-4c06-86c0-a8adf51afe9f" class="beehiiv-embed" data-test-id="beehiiv-embed" frameborder="0" scrolling="no" style="width: 560px; height: 339px; margin: 0; border-radius: 0px 0px 0px 0px !important; background-color: transparent; box-shadow: 0 0 #0000; max-width: 100%;"></iframe>
-  </div>
-  <p class="fine-print">No spam. Just events, drops, and community news.</p>
+  <form class="form-wrap" id="subscribe-form">
+    <input type="email" id="email-input" placeholder="Enter your email" required />
+    <button type="submit" id="submit-btn">Get Access</button>
+  </form>
+  <div class="form-msg" id="form-msg"></div>
+  <p class="fine-print">No spam. Just the next event — when it drops.</p>
 </div>
 <script>
   const container = document.getElementById('stars');
@@ -63,6 +73,40 @@
     s.style.cssText = `width:${size}px;height:${size}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--d:${(Math.random()*4+2).toFixed(1)}s;--delay:-${(Math.random()*6).toFixed(1)}s;--bright:${(Math.random()*0.5+0.2).toFixed(2)};`;
     container.appendChild(s);
   }
+
+  document.getElementById('subscribe-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('email-input').value.trim();
+    const btn = document.getElementById('submit-btn');
+    const msg = document.getElementById('form-msg');
+
+    btn.disabled = true;
+    btn.textContent = 'Joining...';
+    msg.className = 'form-msg';
+    msg.textContent = '';
+
+    try {
+      const res = await fetch('/.netlify/functions/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      });
+      const data = await res.json();
+      if (res.ok) {
+        msg.className = 'form-msg success';
+        msg.textContent = "You're in. We'll see you at the event.";
+        document.getElementById('email-input').value = '';
+        btn.textContent = 'Done';
+      } else {
+        throw new Error(data.error || 'Something went wrong.');
+      }
+    } catch (err) {
+      msg.className = 'form-msg error';
+      msg.textContent = err.message || 'Something went wrong. Try again.';
+      btn.disabled = false;
+      btn.textContent = 'Get Access';
+    }
+  });
 </script>
 </body>
 </html>
