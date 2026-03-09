@@ -132,13 +132,19 @@
     msg.textContent = '';
 
     try {
-      const res = await fetch('/.netlify/functions/subscribe', {
+      const res = await fetch('https://embeds.beehiiv.com/api/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, firstName })
+        body: JSON.stringify({
+          external_embed_id: '6b536a97-3862-4c06-86c0-a8adf51afe9f',
+          publication_id: 'a34f87b7-36af-445a-a468-f69c5c6caa8f',
+          email,
+          ...(firstName && { first_name: firstName }),
+          referrer: window.location.href
+        })
       });
       const data = await res.json();
-      if (res.ok) {
+      if (res.ok && data.success !== false) {
         msg.className = 'form-msg success';
         msg.textContent = "You're in. We'll see you at the next event.";
         document.getElementById('email-input').value = '';
@@ -152,7 +158,7 @@
           document.getElementById('upsell-modal').classList.add('active');
         }, 400);
       } else {
-        throw new Error(data.error || 'Something went wrong.');
+        throw new Error(data.message || data.error || 'Something went wrong.');
       }
     } catch (err) {
       msg.className = 'form-msg error';
