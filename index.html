@@ -49,7 +49,8 @@
     .modal-overlay.active { display: flex; }
     .modal-card { background: var(--mid); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 36px 32px; width: 100%; max-width: 380px; box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04); animation: rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; text-align: center; }
     .modal-card .modal-confirm { font-size: 13px; font-weight: 600; letter-spacing: 0.01em; color: #6ee7a0; margin-bottom: 8px; }
-    .modal-card h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 10vw, 48px); letter-spacing: 0.02em; color: var(--white); margin-bottom: 8px; line-height: 1; }
+    .modal-card h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 10vw, 48px); letter-spacing: 0.02em; color: var(--white); margin-bottom: 8px; line-height: 1.05; }
+    .modal-h2-highlight { color: #6BAED6; }
     .modal-card .modal-sub { color: rgba(248,245,238,0.75); font-size: clamp(13px, 3.5vw, 15px); line-height: 1.6; margin-bottom: 18px; }
     .modal-hat-img { width: 100%; border-radius: 12px; object-fit: cover; max-height: 220px; margin-bottom: 18px; display: block; box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.3); }
     .modal-product-name { font-weight: 600; font-size: 16px; color: var(--white); margin-bottom: 4px; }
@@ -92,9 +93,9 @@
 </div>
 <div class="modal-overlay" id="upsell-modal">
   <div class="modal-card" id="upsell-card">
-    <p class="modal-confirm">You're in. We'll see you at the next event.</p>
-    <h2>Your Support Starts Here.</h2>
-    <p class="modal-sub">Every hat sold funds the mission. First run — limited supply, real impact.</p>
+    <p class="modal-confirm">You're on the list.</p>
+    <h2>Your <span class="modal-h2-highlight">Support</span><br>Starts Here.</h2>
+    <p class="modal-sub">Every hat sold funds the mission.<br>First run — limited supply, real impact.</p>
     <img class="modal-hat-img" src="https://indivisibleusa.myshopify.com/cdn/shop/files/freepik__make-this-hat-balck__60182.png?v=1768584167" alt="Indivisible USA Ranger Hat" />
     <p class="modal-product-name">Indivisible USA Ranger Hat</p>
     <p class="modal-price">$35.00</p>
