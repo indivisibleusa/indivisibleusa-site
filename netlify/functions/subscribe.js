@@ -35,7 +35,7 @@ exports.handler = async (event) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `ApiKey ${apiKey}`,
+        'Authorization': `Bearer ${apiKey}`,
         'Content-Length': Buffer.byteLength(payload)
       }
     }, (res) => {
