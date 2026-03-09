@@ -21,6 +21,10 @@ exports.handler = async (event) => {
   const pubId = process.env.BEEHIIV_PUB_ID;
   const apiKey = process.env.BEEHIIV_API_KEY;
 
+  console.log('pubId length:', pubId ? pubId.length : 'MISSING');
+  console.log('apiKey length:', apiKey ? apiKey.length : 'MISSING');
+  console.log('apiKey last 4:', apiKey ? apiKey.slice(-4) : 'MISSING');
+
   const payload = JSON.stringify({
     email,
     ...(firstName && { first_name: firstName }),
@@ -42,17 +46,23 @@ exports.handler = async (event) => {
       let data = '';
       res.on('data', chunk => data += chunk);
       res.on('end', () => {
+        console.log('Beehiiv status:', res.statusCode);
+        console.log('Beehiiv body:', data);
         if (res.statusCode >= 200 && res.statusCode < 300) {
           resolve({ statusCode: 200, body: JSON.stringify({ success: true }) });
         } else {
           let err = {};
           try { err = JSON.parse(data); } catch {}
-          resolve({ statusCode: res.statusCode, body: JSON.stringify({ error: err.message || 'Subscription failed' }) });
+          resolve({
+            statusCode: res.statusCode,
+            body: JSON.stringify({ error: err.message || err.errors?.[0]?.message || data || 'Subscription failed' })
+          });
         }
       });
     });
 
     req.on('error', (e) => {
+      console.log('Request error:', e.message);
       resolve({ statusCode: 500, body: JSON.stringify({ error: e.message }) });
     });
 
