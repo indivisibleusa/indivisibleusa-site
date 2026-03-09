@@ -49,11 +49,11 @@
     .modal-overlay.active { display: flex; }
     .modal-card { background: var(--mid); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 36px 32px; width: 100%; max-width: 380px; box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04); animation: rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; text-align: center; }
     .modal-card .modal-confirm { font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #6ee7a0; margin-bottom: 10px; }
-    .modal-card h2 { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 0.02em; color: var(--white); margin-bottom: 6px; }
-    .modal-card .modal-sub { color: rgba(248,245,238,0.6); font-size: 14px; line-height: 1.6; margin-bottom: 20px; }
+    .modal-card h2 { font-family: 'Bebas Neue', sans-serif; font-size: 52px; letter-spacing: 0.02em; color: var(--white); margin-bottom: 6px; line-height: 1; }
+    .modal-card .modal-sub { color: rgba(248,245,238,0.75); font-size: 15px; line-height: 1.6; margin-bottom: 20px; }
     .modal-hat-img { width: 100%; border-radius: 12px; object-fit: cover; max-height: 220px; margin-bottom: 18px; display: block; }
     .modal-product-name { font-weight: 600; font-size: 16px; color: var(--white); margin-bottom: 4px; }
-    .modal-price { font-size: 22px; font-family: 'Bebas Neue', sans-serif; color: var(--gold); letter-spacing: 0.05em; margin-bottom: 20px; }
+    .modal-price { font-size: 26px; font-family: 'Bebas Neue', sans-serif; color: var(--gold); letter-spacing: 0.05em; margin-bottom: 20px; }
     .modal-btn { background: var(--red); color: var(--white); border: none; border-radius: 10px; padding: 13px 20px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; width: 100%; transition: background 0.2s, transform 0.1s; text-decoration: none; display: block; margin-bottom: 12px; }
     .modal-btn:hover { background: #a80d25; }
     .modal-btn:active { transform: scale(0.97); }
@@ -92,13 +92,13 @@
 </div>
 <div class="modal-overlay" id="upsell-modal">
   <div class="modal-card" id="upsell-card">
-    <p class="modal-confirm">You're in!</p>
-    <h2>Rep the Movement</h2>
-    <p class="modal-sub">While you're here — show your support and rep the movement.</p>
+    <p class="modal-confirm">✓ You're in.</p>
+    <h2>You're In. Now Wear It.</h2>
+    <p class="modal-sub">The hat is how the world knows you meant it. First run — grab yours while it lasts.</p>
     <img class="modal-hat-img" src="https://indivisibleusa.myshopify.com/cdn/shop/files/freepik__make-this-hat-balck__60182.png?v=1768584167" alt="Indivisible USA Ranger Hat" />
     <p class="modal-product-name">Indivisible USA Ranger Hat</p>
     <p class="modal-price">$35.00</p>
-    <a class="modal-btn" href="https://indivisibleusa.myshopify.com/products/indivisible-usa-5-panel-hat?variant=46979357212850" target="_blank" rel="noopener">Shop Now</a>
+    <a class="modal-btn" id="upsell-shop-btn" href="https://indivisibleusa.myshopify.com/cart/46979357212850:1" target="_blank" rel="noopener">Shop Now</a>
     <button class="modal-dismiss" id="modal-dismiss">No thanks</button>
   </div>
 </div>
@@ -143,6 +143,10 @@
         document.getElementById('email-input').value = '';
         document.getElementById('name-input').value = '';
         btn.textContent = 'Done';
+        const shopBase = 'https://indivisibleusa.myshopify.com/cart/46979357212850:1';
+        const checkoutUrl = shopBase + '?checkout[email]=' + encodeURIComponent(email)
+          + '&checkout[shipping_address][first_name]=' + encodeURIComponent(firstName);
+        document.getElementById('upsell-shop-btn').href = checkoutUrl;
         setTimeout(() => {
           document.getElementById('upsell-modal').classList.add('active');
         }, 400);
