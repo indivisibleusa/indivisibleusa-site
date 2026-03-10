@@ -149,6 +149,7 @@
       if (res.ok) {
         msg.className = 'form-msg success';
         msg.textContent = "You're in. We'll see you at the next event.";
+        gtag('event', 'generate_lead', { method: 'email_signup' });
         document.getElementById('email-input').value = '';
         document.getElementById('name-input').value = '';
         btn.textContent = 'Done';
