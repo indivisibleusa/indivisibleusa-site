@@ -113,6 +113,7 @@
       animation: rise 0.7s 0.2s var(--ease) both;
     }
     .sub strong { color: rgba(255,255,255,0.85); font-weight: 500; }
+    .sub br { line-height: 2.2; }
 
     /* Social proof */
     .social-proof {
@@ -203,7 +204,7 @@
 
   <p class="eyebrow">Indivisible USA</p>
   <h1>Help Us <span class="red">Heal</span> America.</h1>
-  <p class="sub"><strong>More people are showing up every week.</strong><br>Get on the list and we'll let you know when the next one is.</p>
+  <p class="sub">Get on the list and we'll let you know<br>when the next one is.</p>
 
   <div class="social-proof">
     <div class="avatars">
@@ -252,16 +253,13 @@
     btn.disabled = true;
 
     try {
-      const res = await fetch('https://embeds.beehiiv.com/api/submit', {
+      const res = await fetch('/.netlify/functions/beehiiv-subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          publicationId: '6b536a97-3862-4c06-86c0-a8adf51afe9f',
-          email,
-          name,
-          utm_source: 'landing-page'
-        })
+        body: JSON.stringify({ email, name, first_name: name })
       });
+
+      if (!res.ok) throw new Error(await res.text());
 
       document.getElementById('joinForm').style.display = 'none';
       document.getElementById('successMsg').style.display = 'block';
