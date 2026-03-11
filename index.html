@@ -168,6 +168,10 @@
       0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34,197,94,0.5); }
       50%       { opacity: 0.7; box-shadow: 0 0 0 6px rgba(34,197,94,0); }
     }
+    @keyframes livepulse-gold {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(201,168,76,0.5); }
+      50%       { opacity: 0.7; box-shadow: 0 0 0 6px rgba(201,168,76,0); }
+    }
 
     .live-label {
       font-size: 9px; font-weight: 700;
@@ -1268,6 +1272,10 @@
           "Every morning, thousands of us show up at <span class="red">@pledgeofallegiancedaily</span>. To honor this country. To remind anyone watching that we still stand for it."
         </p>
         <p class="mission-body">Indivisible USA is a daily practice. Show up every morning. Keep the thread alive.</p>
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:14px;opacity:0.75;">
+          <div class="live-dot" style="width:5px;height:5px;background:#c9a84c;box-shadow:none;animation:livepulse-gold 2s infinite;"></div>
+          <span style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:#c9a84c;">Live follower count</span>
+        </div>
         <div class="stats-grid">
           <div class="stat">
             <div class="stat-num" id="count-total">53.5K</div>
@@ -1285,10 +1293,6 @@
             <div class="stat-num" id="count-tiktok">5.4K</div>
             <div class="stat-label">TikTok</div>
           </a>
-        </div>
-        <div style="display:flex;align-items:center;gap:6px;justify-content:flex-end;margin-top:14px;opacity:0.55;">
-          <div class="live-dot" style="width:5px;height:5px;"></div>
-          <span style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:500;color:var(--ink);">Updated daily</span>
         </div>
       </div>
     </div>
