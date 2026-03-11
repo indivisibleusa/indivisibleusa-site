@@ -3,20 +3,25 @@ exports.handler = async (event) => {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
 
+  const headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type',
+  };
+
   let email, firstName;
   try {
     const body = JSON.parse(event.body);
     email = body.email;
-    firstName = body.first_name || body.firstName || '';
+    firstName = body.first_name || body.firstName || body.name || '';
   } catch {
-    return { statusCode: 400, body: 'Invalid JSON' };
+    return { statusCode: 400, headers, body: 'Invalid JSON' };
   }
 
   if (!email) {
-    return { statusCode: 400, body: 'Email required' };
+    return { statusCode: 400, headers, body: 'Email required' };
   }
 
-  const PUB_ID = 'pub_a34f87b7-36af-445a-a468-f69c5c6caa8f';
+  const PUB_ID = process.env.BEEHIIV_PUB_ID;
   const API_KEY = process.env.BEEHIIV_API_KEY;
 
   const res = await fetch(`https://api.beehiiv.com/v2/publications/${PUB_ID}/subscriptions`, {
@@ -30,19 +35,19 @@ exports.handler = async (event) => {
       first_name: firstName,
       reactivate_existing: true,
       send_welcome_email: true,
-      utm_source: 'manychat',
-      utm_medium: 'instagram_dm',
+      utm_source: 'landing-page',
     }),
   });
 
   const data = await res.json();
 
   if (!res.ok) {
-    return { statusCode: 500, body: JSON.stringify({ error: data }) };
+    return { statusCode: 500, headers, body: JSON.stringify({ error: data }) };
   }
 
   return {
     statusCode: 200,
+    headers,
     body: JSON.stringify({ success: true, id: data.data?.id }),
   };
 };
