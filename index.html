@@ -3,102 +3,274 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <title>Indivisible USA — Join the Movement</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <title>Indivisible USA — Help Us Heal America</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --red: #C8102E; --navy: #0A1628; --white: #F8F5EE; --gold: #D4AF37; --mid: #1C2E4A;
+      --red: #B22234;
+      --red-dark: #8B0E21;
+      --blue: #002868;
+      --ink: #1A2744;
+      --white: #ffffff;
+      --gold: #C9A84C;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --btn-radius: 30px;
     }
     html, body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--navy);
+      font-family: 'Manrope', sans-serif;
+      background: var(--ink);
       min-height: 100vh; min-height: 100dvh;
       display: flex; align-items: center; justify-content: center;
       overflow-x: hidden; position: relative;
       -webkit-font-smoothing: antialiased;
     }
-    .stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+    .stripe-top {
+      position: fixed; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--red) 33.3%, var(--white) 33.3% 66.6%, var(--blue) 66.6%);
+      z-index: 100;
+    }
+    #stars {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+    }
     .star {
       position: absolute; background: white; border-radius: 50%;
       animation: twinkle var(--d, 3s) ease-in-out infinite var(--delay, 0s); opacity: 0;
     }
-    @keyframes twinkle { 0%, 100% { opacity: 0; } 50% { opacity: var(--bright, 0.6); } }
-    .stripe-top {
-      position: fixed; top: 0; left: 0; right: 0; height: 5px;
-      background: linear-gradient(90deg, var(--red) 0%, var(--red) 33%, var(--white) 33%, var(--white) 66%, var(--navy) 66%);
-      z-index: 100;
-    }
+    @keyframes twinkle { 0%, 100% { opacity: 0; } 50% { opacity: var(--bright, 0.5); } }
+
     .card {
       position: relative; z-index: 10;
-      background: var(--mid);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 20px;
-      padding: 44px 40px 40px;
-      width: 100%; max-width: 460px;
-      margin: 28px 16px;
-      box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04);
-      animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+      background: linear-gradient(145deg, #2d4880 0%, #1e3260 50%, #162548 100%);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 40px;
+      padding: 52px 44px 44px;
+      width: 100%; max-width: 480px;
+      margin: 40px 20px;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 8px 24px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.04);
+      text-align: center;
+      animation: rise 0.7s var(--ease) both;
+      overflow: hidden;
+    }
+    /* Subtle radial glow inside card */
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -120px; left: 50%;
+      transform: translateX(-50%);
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(178,34,52,0.18) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .card::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; right: -60px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(0,40,104,0.22) 0%, transparent 65%);
+      pointer-events: none;
     }
     @keyframes rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
-    .avatar-wrap { display: flex; justify-content: center; margin-bottom: 22px; animation: rise 0.7s 0.1s cubic-bezier(0.22, 1, 0.36, 1) both; }
-    .avatar-ring { width: 84px; height: 84px; border-radius: 50%; padding: 3px; background: linear-gradient(135deg, var(--red), var(--gold)); }
-    .avatar-placeholder { width: 100%; height: 100%; border-radius: 50%; background: var(--navy); display: flex; align-items: center; justify-content: center; font-size: 26px; }
-    .eyebrow { text-align: center; font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; animation: rise 0.7s 0.15s cubic-bezier(0.22, 1, 0.36, 1) both; }
-    h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 11vw, 54px); line-height: 1; letter-spacing: 0.02em; text-align: center; color: var(--white); margin-bottom: 14px; animation: rise 0.7s 0.2s cubic-bezier(0.22, 1, 0.36, 1) both; }
-    h1 span { color: var(--red); }
-    .sub { text-align: center; color: rgba(248,245,238,0.6); font-size: clamp(13px, 3.5vw, 15px); line-height: 1.65; margin-bottom: 22px; animation: rise 0.7s 0.25s cubic-bezier(0.22, 1, 0.36, 1) both; }
-    .sub strong { color: var(--white); font-weight: 600; }
-    .social-proof { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 24px; animation: rise 0.7s 0.3s cubic-bezier(0.22, 1, 0.36, 1) both; }
-    .avatars { display: flex; }
-    .avatars span { width: 26px; height: 26px; border-radius: 50%; background: linear-gradient(135deg, #C8102E, #0A1628); border: 2px solid var(--mid); display: flex; align-items: center; justify-content: center; font-size: 10px; margin-left: -7px; color: white; font-weight: 600; }
-    .avatars span:first-child { margin-left: 0; }
-    .social-proof p { font-size: 12px; color: rgba(248,245,238,0.55); }
-    .social-proof p strong { color: rgba(248,245,238,0.85); }
-    .beehiiv-wrap { width: 100%; border-radius: 12px; overflow: hidden; animation: rise 0.7s 0.35s cubic-bezier(0.22, 1, 0.36, 1) both; }
-    .beehiiv-wrap iframe { width: 100%; min-height: 220px; border: none; border-radius: 12px; display: block; }
-    .embed-placeholder { background: rgba(255,255,255,0.04); border: 1.5px dashed rgba(255,255,255,0.15); border-radius: 12px; padding: 28px 20px; text-align: center; color: rgba(248,245,238,0.4); font-size: 13px; line-height: 1.6; }
-    .embed-placeholder strong { display: block; color: var(--gold); font-size: 14px; margin-bottom: 6px; }
-    .fine-print { text-align: center; font-size: 11px; color: rgba(248,245,238,0.28); margin-top: 14px; animation: rise 0.7s 0.4s cubic-bezier(0.22, 1, 0.36, 1) both; }
-    @media (max-width: 480px) {
-      .card { padding: 36px 22px 32px; border-radius: 16px; margin: 20px 12px; }
-      .avatar-ring { width: 74px; height: 74px; }
+
+    /* Profile photo */
+    .logo-wrap {
+      display: flex; justify-content: center; margin-bottom: 20px;
+      position: relative; z-index: 1;
+      animation: rise 0.7s 0.08s var(--ease) both;
     }
-    @media (max-width: 360px) {
-      .card { padding: 28px 16px 26px; }
+    .logo-ring {
+      width: 80px; height: 80px; border-radius: 50%;
+      padding: 2.5px;
+      background: linear-gradient(135deg, var(--red), var(--gold));
+    }
+    .logo-ring img {
+      width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
+      display: block; background: var(--ink);
+    }
+
+    .eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 12px; position: relative; z-index: 1;
+      animation: rise 0.7s 0.12s var(--ease) both;
+    }
+    h1 {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: clamp(34px, 9vw, 46px);
+      line-height: 1.08; letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 14px;
+      position: relative; z-index: 1;
+      animation: rise 0.7s 0.16s var(--ease) both;
+    }
+    h1 .red { color: #e05c6f; }
+
+    .sub {
+      font-size: 15px; color: rgba(255,255,255,0.52);
+      line-height: 1.7; margin-bottom: 24px;
+      position: relative; z-index: 1;
+      animation: rise 0.7s 0.2s var(--ease) both;
+    }
+    .sub strong { color: rgba(255,255,255,0.85); font-weight: 500; }
+
+    /* Social proof */
+    .social-proof {
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px; margin-bottom: 28px;
+      position: relative; z-index: 1;
+      animation: rise 0.7s 0.24s var(--ease) both;
+    }
+    .avatars { display: flex; }
+    .avatar {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--red), #3a5aa0);
+      border: 2px solid rgba(255,255,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 700; color: white;
+      margin-left: -8px;
+    }
+    .avatar:first-child { margin-left: 0; }
+    .avatar.blue-av { background: linear-gradient(135deg, #1e3a7a, #3060c0); }
+    .social-proof p { font-size: 12px; color: rgba(255,255,255,0.50); }
+    .social-proof p strong { color: rgba(255,255,255,0.85); font-weight: 600; }
+
+    /* Form */
+    .join-form {
+      display: flex; flex-direction: column; gap: 12px;
+      position: relative; z-index: 1;
+      animation: rise 0.7s 0.28s var(--ease) both;
+    }
+    .join-input {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 15px 20px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 15px; font-weight: 300;
+      color: var(--white); outline: none;
+      transition: border-color 0.3s var(--ease);
+      width: 100%;
+    }
+    .join-input::placeholder { color: rgba(255,255,255,0.28); }
+    .join-input:focus { border-color: rgba(178,34,52,0.55); }
+    .join-submit {
+      background: var(--red);
+      color: var(--white);
+      font-family: 'Manrope', sans-serif;
+      font-size: 14px; font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 18px;
+      border-radius: var(--btn-radius);
+      border: none; cursor: pointer;
+      box-shadow: 0 8px 28px rgba(178,34,52,0.45);
+      transition: all 0.3s var(--ease); margin-top: 2px;
+    }
+    .join-submit:hover { background: var(--red-dark); transform: translateY(-1px); }
+    .join-submit:active { transform: scale(0.97); }
+
+    .fine-print {
+      font-size: 11px; color: rgba(255,255,255,0.25);
+      margin-top: 10px; position: relative; z-index: 1;
+      animation: rise 0.7s 0.32s var(--ease) both;
+    }
+
+    /* Success state */
+    .success-msg {
+      display: none; text-align: center;
+      padding: 20px 0; position: relative; z-index: 1;
+    }
+    .success-msg p:first-child { font-size: 32px; margin-bottom: 10px; }
+    .success-msg p:last-child { font-size: 15px; color: rgba(255,255,255,0.6); }
+
+    @media (max-width: 480px) {
+      .card { padding: 40px 24px 36px; border-radius: 28px; margin: 24px 14px; }
+      .logo-ring { width: 68px; height: 68px; }
+      h1 { font-size: 32px; }
     }
   </style>
 </head>
 <body>
 <div class="stripe-top"></div>
-<div class="stars" id="stars"></div>
+<div id="stars"></div>
+
 <div class="card">
-  <div class="avatar-wrap">
-    <div class="avatar-ring">
-      <div class="avatar-placeholder">🇺🇸</div>
+  <div class="logo-wrap">
+    <div class="logo-ring">
+      <img src="profile.jpg" alt="Indivisible USA" onerror="this.style.display='none';this.parentElement.innerHTML='<div style=\'width:100%;height:100%;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;font-size:24px;\'>🇺🇸</div>'" />
     </div>
   </div>
+
   <p class="eyebrow">Indivisible USA</p>
-  <h1>Run With Us.<br><span>Stand For</span> Something.</h1>
-  <p class="sub">Get <strong>first access</strong> to events, merch drops, and updates from the community that's showing up for America.</p>
+  <h1>Help Us <span class="red">Heal</span> America.</h1>
+  <p class="sub"><strong>More people are showing up every week.</strong><br>Get on the list and we'll let you know when the next one is.</p>
+
   <div class="social-proof">
-    <div class="avatars"><span>T</span><span>J</span><span>M</span><span>+</span></div>
-    <p><strong>1,200+</strong> Americans already in.</p>
+    <div class="avatars">
+      <div class="avatar">M</div>
+      <div class="avatar blue-av">R</div>
+      <div class="avatar">K</div>
+      <div class="avatar blue-av">T</div>
+      <div class="avatar">+</div>
+    </div>
+    <p><strong>1,200+ Americans</strong> already on the list.</p>
   </div>
-  <div class="beehiiv-wrap">
-    <iframe src="https://embeds.beehiiv.com/6b536a97-3862-4c06-86c0-a8adf51afe9f" data-test-id="beehiiv-embed" width="100%" frameborder="0" scrolling="no" style="border-radius:12px;border:none;background:transparent;"></iframe>
+
+  <form class="join-form" id="joinForm">
+    <input class="join-input" type="text" id="nameInput" placeholder="First name" required />
+    <input class="join-input" type="email" id="emailInput" placeholder="Email address" required />
+    <button type="submit" class="join-submit" id="joinBtn">I'm In</button>
+  </form>
+
+  <div class="success-msg" id="successMsg">
+    <p>🇺🇸</p>
+    <p>You're on the list. We'll be in touch.</p>
   </div>
-  <p class="fine-print">No spam. Just events, drops, and community news.</p>
+
+  <p class="fine-print">No spam. Just events — when they drop.</p>
 </div>
+
 <script>
+  // Stars
   const container = document.getElementById('stars');
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 120; i++) {
     const s = document.createElement('div');
     s.className = 'star';
-    const size = Math.random() * 2.2 + 0.5;
-    s.style.cssText = `width:${size}px;height:${size}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--d:${(Math.random()*4+2).toFixed(1)}s;--delay:-${(Math.random()*6).toFixed(1)}s;--bright:${(Math.random()*0.5+0.2).toFixed(2)};`;
+    const size = Math.random() * 2 + 0.5;
+    s.style.cssText = `width:${size}px;height:${size}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--d:${(Math.random()*4+2).toFixed(1)}s;--delay:-${(Math.random()*6).toFixed(1)}s;--bright:${(Math.random()*0.45+0.15).toFixed(2)};`;
     container.appendChild(s);
   }
+
+  // Form submit → Beehiiv
+  document.getElementById('joinForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('joinBtn');
+    const name = document.getElementById('nameInput').value.trim();
+    const email = document.getElementById('emailInput').value.trim();
+
+    btn.textContent = 'Joining…';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch('https://embeds.beehiiv.com/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          publicationId: '6b536a97-3862-4c06-86c0-a8adf51afe9f',
+          email,
+          name,
+          utm_source: 'landing-page'
+        })
+      });
+
+      document.getElementById('joinForm').style.display = 'none';
+      document.getElementById('successMsg').style.display = 'block';
+    } catch (err) {
+      btn.textContent = "I'm In";
+      btn.disabled = false;
+      console.error(err);
+    }
+  });
 </script>
 </body>
 </html>
